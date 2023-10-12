@@ -21,6 +21,7 @@ module.exports = {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
+      { checksVoidReturn: false },
     ],
     'react/react-in-jsx-scope': 'off'
   },
