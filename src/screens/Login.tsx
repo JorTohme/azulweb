@@ -8,14 +8,24 @@ export default function Login (): JSX.Element {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     try {
-      const response = await fetch('http://192.168.1.94:3000/user/loginJWT', {
+      await fetch('http://192.168.1.94:3000/user/loginJWT', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ email, password })
       }).then(async res => await res.json())
-      console.log(response)
+        .then((data: any) => {
+          if (!data.success) {
+            throw new Error(data.error)
+          }
+
+          if (data.success) {
+            localStorage.setItem('token', data.token)
+            localStorage.setItem('user', JSON.stringify(data.user))
+            window.location.href = '/home'
+          }
+        })
     } catch (error: unknown) {
       setError(error as string)
     }
@@ -54,7 +64,7 @@ export default function Login (): JSX.Element {
                 className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white'
                 id='password'
                 type='password'
-                placeholder='******************'
+                placeholder='***********'
                 value={password}
                 onChange={(event) => { setPassword(event.target.value) }
                 }

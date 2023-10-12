@@ -1,12 +1,9 @@
-import { useState } from 'react'
-
 import './App.css'
-import Login from './screens/Login'
 
 function App (): JSX.Element {
   return (
     <>
-      <Login />
+      <h1>Main</h1>
     </>
   )
 }
