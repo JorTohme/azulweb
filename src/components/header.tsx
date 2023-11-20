@@ -2,7 +2,7 @@ import { assets } from '../utils/assets'
 
 const Header = (): JSX.Element => {
   return (
-    <header className={'w-full h-16 px-3 flex items-center justify-between bg-primaryRed1'}>
+    <header className={'w-full h-16 px-3 flex items-center justify-between bg-primaryRed2'}>
       <h1 className="text-3xl font-bold text-white">
         Mesas
       </h1>

@@ -13,6 +13,9 @@ export default {
         tableFree: colorsPalette.tableFree,
         tableBusy: colorsPalette.tableBusy,
         tablePay: colorsPalette.tablePay,
+        tableFreeAccent: colorsPalette.tableFreeAccent,
+        tableBusyAccent: colorsPalette.tableBusyAccent,
+        tablePayAccent: colorsPalette.tablePayAccent,
       }
     },
   },

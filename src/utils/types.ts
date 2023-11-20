@@ -5,13 +5,15 @@ export interface tableTypes {
   state: string
 }
 
+export interface spacesDataTypes {
+  id: number
+  name: string
+  tables: tableTypes[]
+}
+
 export interface spaceTypes {
   selectedSpace: number
-  spacesData: Record<number, {
-    id: number
-    name: string
-    tables: tableTypes[]
-  }>
+  spacesData: spacesDataTypes[]
 }
 
 export const tableState = {

@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react'
 import Header from '../components/header'
 import TablesSpaceView from '../components/tablesSpaceView'
 
+import type { spacesDataTypes } from '../utils/types'
+
 const Tables = (): JSX.Element => {
-  const [spaces, setSpaces] = useState([])
+  const [spaces, setSpaces] = useState<spacesDataTypes>()
+  const [selectedSpace, setSelectedSpace] = useState<number>(0)
 
   useEffect(() => {
     document.title = 'Mesas'
@@ -17,11 +20,10 @@ const Tables = (): JSX.Element => {
         origin: 'b8c5c6d1a8f7e4b9d0e3a2f5c4d1b7e8'
       }
     }).then(async res => await res.json())
-      .then((data: any) => {
-        console.log(data)
+      .then((data: spacesDataTypes) => {
         setSpaces(data)
       }
-      ).catch((error: any) => {
+      ).catch((error: unknown) => {
         console.log(error)
       })
   }, [])
@@ -29,24 +31,21 @@ const Tables = (): JSX.Element => {
   return (
     <>
       <Header />
+      <div className='w-full p-3 border flex gap-5'>
       {
         spaces?.map((space: any) => {
           return (
-            <div key={space.id}>
-              <h1>{space.name}</h1>
-            </div>
+            <button key={space.id} onClick={() => { setSelectedSpace(space.id - 1) }}
+            className={`py-1 px-4 rounded-lg bg-primaryRed1 text-white ${selectedSpace === space.id - 1 && 'bg-primaryRed2'}`}>
+              {space.name}
+            </button>
           )
         })
       }
+      </div>
       <main>
         {
-          spaces?.map((space: any) => {
-            return (
-              <TablesSpaceView key={space.id} selectedSpace={2} spacesData={
-                spaces
-              }/>
-            )
-          })
+          spaces && <TablesSpaceView selectedSpace={selectedSpace} spacesData={spaces} />
         }
       </main>
     </>
